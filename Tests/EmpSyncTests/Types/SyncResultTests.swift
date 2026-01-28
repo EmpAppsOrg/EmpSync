@@ -10,7 +10,7 @@ struct SyncResultTests {
             pushed: 5,
             pulled: 3,
             conflicts: 1,
-            errors: [.networkUnavailable],
+            errors: [.networkUnavailable]
         )
 
         #expect(result.pushed == 5)

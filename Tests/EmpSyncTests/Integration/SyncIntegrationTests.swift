@@ -16,7 +16,7 @@ struct SyncIntegrationTests {
             updatedAt: Date(),
             isDeleted: false,
             name: "Integration",
-            color: "#123456",
+            color: "#123456"
         )
 
         let task = TaskItem(
@@ -30,7 +30,7 @@ struct SyncIntegrationTests {
             priority: .medium,
             deadline: nil,
             tags: [tag],
-            links: [],
+            links: []
         )
 
         // Convert to CKRecord and back
@@ -60,7 +60,7 @@ struct SyncIntegrationTests {
             updatedAt: baseDate.addingTimeInterval(100),
             isDeleted: false,
             name: "Local Version",
-            color: "#FF0000",
+            color: "#FF0000"
         )
 
         let remote = Tag(
@@ -69,7 +69,7 @@ struct SyncIntegrationTests {
             updatedAt: baseDate.addingTimeInterval(200),
             isDeleted: false,
             name: "Remote Version",
-            color: "#00FF00",
+            color: "#00FF00"
         )
 
         let strategy = ConflictStrategy.lastWriteWins
@@ -87,7 +87,7 @@ struct SyncIntegrationTests {
             updatedAt: Date(),
             isDeleted: true,
             name: "Deleted Tag",
-            color: "#000000",
+            color: "#000000"
         )
 
         let record = tag.toCKRecord()
@@ -108,7 +108,7 @@ struct SyncIntegrationTests {
             body: "Testing multiple tags",
             status: .inProgress,
             priority: .high,
-            tags: [tag1, tag2],
+            tags: [tag1, tag2]
         )
 
         // Convert to records and back
@@ -139,14 +139,14 @@ struct SyncIntegrationTests {
             id: id,
             createdAt: baseDate,
             updatedAt: baseDate.addingTimeInterval(50),
-            title: "Local Task",
+            title: "Local Task"
         )
 
         let remoteTask = TaskItem(
             id: id,
             createdAt: baseDate,
             updatedAt: baseDate.addingTimeInterval(100),
-            title: "Remote Task",
+            title: "Remote Task"
         )
 
         // lastWriteWins picks newer
@@ -196,7 +196,7 @@ struct SyncIntegrationTests {
             priority: .high,
             deadline: deadline,
             tags: [tag],
-            links: [link],
+            links: [link]
         )
 
         // Roundtrip through CKRecord

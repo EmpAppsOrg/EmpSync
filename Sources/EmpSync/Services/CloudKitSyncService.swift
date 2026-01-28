@@ -51,7 +51,6 @@ public final class CloudKitSyncService: SyncService, @unchecked Sendable {
             let result = SyncResult(pushed: 0, pulled: 0, conflicts: 0, errors: [])
             stateSubject.send(.idle)
             return result
-
         } catch let error as SyncError {
             stateSubject.send(.error(error))
             throw error
@@ -69,7 +68,7 @@ public final class CloudKitSyncService: SyncService, @unchecked Sendable {
         let configuration = CKSyncEngine.Configuration(
             database: database,
             stateSerialization: nil,
-            delegate: SyncEngineDelegate(service: self),
+            delegate: SyncEngineDelegate(service: self)
         )
 
         syncEngine = CKSyncEngine(configuration)
@@ -143,7 +142,7 @@ private final class SyncEngineDelegate: CKSyncEngineDelegate, @unchecked Sendabl
 
     func nextRecordZoneChangeBatch(
         _ context: CKSyncEngine.SendChangesContext,
-        syncEngine: CKSyncEngine,
+        syncEngine: CKSyncEngine
     ) -> CKSyncEngine.RecordZoneChangeBatch? {
         // Return pending changes to sync
         nil

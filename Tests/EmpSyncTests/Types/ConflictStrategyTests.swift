@@ -26,7 +26,7 @@ struct ConflictStrategyTests {
             updatedAt: Date(timeIntervalSince1970: 2000),
             isDeleted: false,
             name: "Old",
-            color: "#FF0000",
+            color: "#FF0000"
         )
         let newer = Tag(
             id: older.id,
@@ -34,7 +34,7 @@ struct ConflictStrategyTests {
             updatedAt: Date(timeIntervalSince1970: 3000),
             isDeleted: false,
             name: "New",
-            color: "#00FF00",
+            color: "#00FF00"
         )
 
         let result = ConflictStrategy.lastWriteWins.resolve(local: older, remote: newer)
@@ -52,7 +52,7 @@ struct ConflictStrategyTests {
             updatedAt: Date(),
             isDeleted: false,
             name: "Local",
-            color: "#FF0000",
+            color: "#FF0000"
         )
         let remote = Tag(
             id: local.id,
@@ -60,7 +60,7 @@ struct ConflictStrategyTests {
             updatedAt: Date().addingTimeInterval(1000),
             isDeleted: false,
             name: "Remote",
-            color: "#00FF00",
+            color: "#00FF00"
         )
 
         let result = ConflictStrategy.keepLocal.resolve(local: local, remote: remote)
@@ -75,7 +75,7 @@ struct ConflictStrategyTests {
             updatedAt: Date().addingTimeInterval(1000),
             isDeleted: false,
             name: "Local",
-            color: "#FF0000",
+            color: "#FF0000"
         )
         let remote = Tag(
             id: local.id,
@@ -83,7 +83,7 @@ struct ConflictStrategyTests {
             updatedAt: Date(),
             isDeleted: false,
             name: "Remote",
-            color: "#00FF00",
+            color: "#00FF00"
         )
 
         let result = ConflictStrategy.keepRemote.resolve(local: local, remote: remote)

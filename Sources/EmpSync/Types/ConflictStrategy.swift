@@ -12,7 +12,11 @@ public struct ConflictStrategy: Sendable {
 
     /// Resolve conflict between local and remote models
     public func resolve<T: EmpModel>(local: T, remote: T) -> T {
-        resolver(local, remote) as! T
+        let resolved = resolver(local, remote)
+        guard let result = resolved as? T else {
+            preconditionFailure("ConflictStrategy resolver returned wrong type")
+        }
+        return result
     }
 
     /// Keep the record with the most recent updatedAt timestamp
@@ -32,7 +36,7 @@ public struct ConflictStrategy: Sendable {
 
     /// Create a custom conflict resolution strategy
     public static func custom(
-        _ resolver: @escaping @Sendable (any EmpModel, any EmpModel) -> any EmpModel,
+        _ resolver: @escaping @Sendable (any EmpModel, any EmpModel) -> any EmpModel
     ) -> ConflictStrategy {
         ConflictStrategy(resolver: resolver)
     }

@@ -4,3 +4,4 @@
 --trimwhitespace always
 --importgrouping alpha
 --stripunusedargs closure-only
+--commas inline

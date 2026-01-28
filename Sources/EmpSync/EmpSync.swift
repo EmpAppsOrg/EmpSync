@@ -38,18 +38,3 @@ public enum EmpSync {
     /// Current version of the EmpSync module
     public static let version = "1.0.0"
 }
-
-// Types
-public typealias _SyncState = SyncState
-public typealias _SyncError = SyncError
-public typealias _SyncResult = SyncResult
-public typealias _ConflictStrategy = ConflictStrategy
-public typealias _SyncRecordError = SyncRecordError
-
-// Protocols
-public typealias _SyncService = SyncService
-public typealias _SyncableRecord = SyncableRecord
-
-// Services
-public typealias _CloudKitSyncService = CloudKitSyncService
-public typealias _NetworkMonitor = NetworkMonitor

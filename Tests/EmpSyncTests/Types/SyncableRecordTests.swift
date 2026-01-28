@@ -14,7 +14,7 @@ struct SyncableRecordTests {
             updatedAt: Date(),
             isDeleted: false,
             name: "Work",
-            color: "#FF5733",
+            color: "#FF5733"
         )
 
         // Convert to CKRecord
@@ -45,7 +45,7 @@ struct SyncableRecordTests {
             priority: .high,
             deadline: Date().addingTimeInterval(86400),
             tags: [],
-            links: [],
+            links: []
         )
 
         let record = task.toCKRecord()
@@ -71,7 +71,7 @@ struct SyncableRecordTests {
             title: "My Day",
             body: AttributedString("Had a great day!"),
             tags: [],
-            links: [],
+            links: []
         )
 
         let record = entry.toCKRecord()
@@ -92,7 +92,7 @@ struct SyncableRecordTests {
             updatedAt: Date(),
             isDeleted: false,
             name: "Test",
-            color: "#000000",
+            color: "#000000"
         )
 
         let record = tag.toCKRecord()

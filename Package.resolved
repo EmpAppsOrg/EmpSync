@@ -1,0 +1,15 @@
+{
+  "originHash" : "0465ed55b635b609715a20f895499333d2427443f637ecf7138950c461095cd4",
+  "pins" : [
+    {
+      "identity" : "empcore",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/EmpAppsOrg/EmpCore.git",
+      "state" : {
+        "revision" : "54a7efb4310469caa720520dfd4353a502e6be60",
+        "version" : "0.1.0"
+      }
+    }
+  ],
+  "version" : 3
+}

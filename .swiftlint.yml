@@ -1,0 +1,29 @@
+strict: true
+
+opt_in_rules:
+  - force_unwrapping
+  - implicitly_unwrapped_optional
+  - closure_spacing
+  - empty_count
+  - sorted_imports
+
+disabled_rules:
+  - trailing_comma
+  - force_cast
+  - function_body_length
+
+type_name:
+  allowed_symbols: ["_"]
+
+identifier_name:
+  min_length: 1
+  excluded:
+    - id
+    - to
+    - a
+    - b
+
+excluded:
+  - .build
+  - Derived
+  - "*.generated.swift"

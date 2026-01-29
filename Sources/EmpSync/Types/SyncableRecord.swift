@@ -175,3 +175,60 @@ extension DiaryEntry: SyncableRecord {
         )
     }
 }
+
+// MARK: - ContactItem + SyncableRecord
+
+extension ContactItem: SyncableRecord {
+    public static var recordType: String { "ContactItem" }
+
+    public func toCKRecord() -> CKRecord {
+        let recordID = CKRecord.ID(recordName: id.uuidString)
+        let record = CKRecord(recordType: Self.recordType, recordID: recordID)
+        record["id"] = id.uuidString
+        record["createdAt"] = createdAt
+        record["updatedAt"] = updatedAt
+        record["isDeleted"] = isDeleted
+        record["firstName"] = firstName
+        record["lastName"] = lastName
+        record["nickname"] = nickname
+        record["phone"] = phone
+        record["email"] = email
+        record["sourceContactIdentifier"] = sourceContactIdentifier
+        if let notes {
+            record["notes"] = String(notes.characters)
+        }
+        if let photo {
+            record["photo"] = photo
+        }
+        if let tagsData = try? JSONEncoder().encode(tags) {
+            record["tags"] = tagsData
+        }
+        if let fieldsData = try? JSONEncoder().encode(customFields) {
+            record["customFields"] = fieldsData
+        }
+        if let linksData = try? JSONEncoder().encode(links) {
+            record["links"] = linksData
+        }
+        return record
+    }
+
+    public init(from record: CKRecord) throws {
+        self.init(
+            id: try record.requiredUUID("id"),
+            createdAt: try record.requiredDate("createdAt"),
+            updatedAt: try record.requiredDate("updatedAt"),
+            isDeleted: try record.requiredBool("isDeleted"),
+            firstName: try record.requiredString("firstName"),
+            lastName: try record.requiredString("lastName"),
+            nickname: record["nickname"] as? String,
+            photo: record["photo"] as? Data,
+            phone: record["phone"] as? String,
+            email: record["email"] as? String,
+            notes: (record["notes"] as? String).map { AttributedString($0) },
+            tags: record.decodedArray("tags"),
+            customFields: record.decodedArray("customFields"),
+            links: record.decodedArray("links"),
+            sourceContactIdentifier: record["sourceContactIdentifier"] as? String
+        )
+    }
+}

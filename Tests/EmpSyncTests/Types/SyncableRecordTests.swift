@@ -83,6 +83,53 @@ struct SyncableRecordTests {
         #expect(restored.title == entry.title)
     }
 
+    @Test("ContactItem conforms to SyncableRecord")
+    func contactItemConformance() throws {
+        let tag = Tag(name: "Work", color: "#FF0000")
+        let field = ContactField(label: "Telegram", type: .text, value: "@ivan")
+        let contact = ContactItem(
+            firstName: "Ivan",
+            lastName: "Petrov",
+            nickname: "ivanko",
+            phone: "+79991234567",
+            email: "ivan@mail.com",
+            tags: [tag],
+            customFields: [field]
+        )
+
+        let record = contact.toCKRecord()
+        #expect(record.recordType == ContactItem.recordType)
+        #expect(record["firstName"] as? String == "Ivan")
+        #expect(record["lastName"] as? String == "Petrov")
+        #expect(record["nickname"] as? String == "ivanko")
+        #expect(record["phone"] as? String == "+79991234567")
+        #expect(record["email"] as? String == "ivan@mail.com")
+
+        let restored = try ContactItem(from: record)
+        #expect(restored.id == contact.id)
+        #expect(restored.firstName == "Ivan")
+        #expect(restored.lastName == "Petrov")
+        #expect(restored.nickname == "ivanko")
+        #expect(restored.phone == "+79991234567")
+        #expect(restored.tags.count == 1)
+        #expect(restored.customFields.count == 1)
+    }
+
+    @Test("ContactItem with notes round-trips via CKRecord")
+    func contactItemNotes() throws {
+        let contact = ContactItem(
+            firstName: "Maria",
+            lastName: "Sidorova",
+            notes: AttributedString("Some notes about Maria")
+        )
+
+        let record = contact.toCKRecord()
+        #expect(record["notes"] as? String == "Some notes about Maria")
+
+        let restored = try ContactItem(from: record)
+        #expect(String(restored.notes!.characters) == "Some notes about Maria")
+    }
+
     @Test("SyncableRecord recordID uses model UUID")
     func recordIDFromUUID() {
         let id = UUID()
